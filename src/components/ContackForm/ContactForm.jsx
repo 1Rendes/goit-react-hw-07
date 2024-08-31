@@ -3,7 +3,7 @@ import { useId } from "react";
 import css from "./ContactForm.module.css";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
-import { addContact } from "../../redux/contactsSlice";
+import { apiPostContact } from "../../redux/contactsOps";
 
 const ContactSchema = Yup.object().shape({
   name: Yup.string()
@@ -27,11 +27,7 @@ const ContactForm = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (values, action) => {
-    const contact = {
-      ...values,
-      id: Date.now(),
-    };
-    dispatch(addContact(contact));
+    dispatch(apiPostContact(values));
     action.resetForm();
   };
 
